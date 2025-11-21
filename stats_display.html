@@ -1,0 +1,604 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { 
+  ArrowRight, Globe, BarChart, Users, Zap, Shield, CheckCircle2, PlayCircle, 
+  Menu, X, Search, User, ChevronDown, Facebook, Twitter, Linkedin, Instagram, Mail, Phone, MapPin 
+} from 'lucide-react';
+
+// Custom styles to define the brand colors, fonts, and animations
+// as they were set in the original index.html file's tailwind config block.
+// This ensures the custom classes (like brand-red, font-heading, and animations) work.
+const CustomStyles = () => (
+  <style>
+    {`
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700;900&display=swap');
+
+      /* Custom Tailwind configuration replication */
+      .bg-brand-dark { background-color: #222222; }
+      .text-brand-dark { color: #222222; }
+      .bg-brand-red { background-color: #e60000; }
+      .text-brand-red { color: #e60000; }
+      .hover\\:bg-brand-hover:hover { background-color: #cc0000; }
+      
+      .font-heading { font-family: 'Roboto', sans-serif; }
+      .font-sans { font-family: 'Inter', sans-serif; }
+      
+      /* Custom Animations */
+      @keyframes slideUp {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+      .animate-slide-up { animation: slideUp 0.8s ease-out forwards; }
+      
+      @keyframes blob {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        30% { transform: translate(30px, -20px) scale(1.1); }
+        60% { transform: translate(-10px, 15px) scale(0.9); }
+      }
+      .animate-blob { animation: blob 8s infinite ease-in-out alternate; }
+      .animation-delay-2000 { animation-delay: 2s; }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        scroll-behavior: smooth;
+      }
+    `}
+  </style>
+);
+
+// CountUpStats Component
+interface CountUpStatsProps {
+  end: number;
+  duration?: number;
+  suffix?: string;
+  prefix?: string;
+  decimals?: number;
+  label: string;
+}
+
+const CountUpStats: React.FC<CountUpStatsProps> = ({ 
+  end, 
+  duration = 2500, 
+  suffix = '', 
+  prefix = '', 
+  decimals = 0,
+  label
+}) => {
+  const [count, setCount] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const elementRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    const startTime = Date.now();
+
+    const updateCount = () => {
+      const now = Date.now();
+      const progress = Math.min((now - startTime) / duration, 1);
+      
+      // Ease out expo
+      const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      
+      const currentCount = easeProgress * end;
+      setCount(currentCount);
+
+      if (progress < 1) {
+        requestAnimationFrame(updateCount);
+      }
+    };
+
+    requestAnimationFrame(updateCount);
+  }, [isVisible, end, duration]);
+
+  const formattedNumber = count.toLocaleString('en-US', {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  });
+
+  return (
+    // MODIFIED: Changed layout to be left-aligned (items-start, justify-start) and removed previous background/hover styles
+    <div ref={elementRef} className="flex flex-col items-start justify-start w-full h-full group cursor-default p-0">
+      <div className="text-5xl md:text-6xl lg:text-7xl font-heading font-black text-brand-red mb-4 tracking-tight transition-transform duration-300 drop-shadow-sm">
+        {prefix}{formattedNumber}{suffix}
+      </div>
+      <div className="text-brand-dark font-bold text-xl md:text-2xl uppercase tracking-wide text-left">
+        {label}
+      </div>
+      <div className="w-12 h-1 bg-brand-red mt-4 rounded-full"></div>
+    </div>
+  );
+};
+
+
+// Footer Component
+const Footer: React.FC = () => {
+  return (
+    <footer className="bg-brand-dark text-gray-300 pt-16 pb-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          
+          {/* Company Info */}
+          <div>
+            <div className="mb-6">
+              <div className="bg-brand-red text-white font-bold text-2xl px-2 py-1 rounded-sm inline-block font-heading">
+                1MDM
+              </div>
+            </div>
+            <p className="text-sm text-gray-400 mb-6 leading-relaxed">
+              The leading B2B marketplace connecting buyers and suppliers globally. We provide tools and services to help businesses grow internationally.
+            </p>
+            <div className="flex space-x-4">
+              <a href="#" className="text-gray-400 hover:text-white transition-colors"><Facebook size={20} /></a>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors"><Twitter size={20} /></a>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors"><Linkedin size={20} /></a>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors"><Instagram size={20} /></a>
+            </div>
+          </div>
+
+          {/* Platform Links */}
+          <div>
+            <h3 className="text-white font-bold text-lg mb-6">Platform</h3>
+            <ul className="space-y-3 text-sm">
+              <li><a href="#" className="hover:text-brand-red transition-colors">About Us</a></li>
+              <li><a href="#" className="hover:text-brand-red transition-colors">Success Stories</a></li>
+              <li><a href="#" className="hover:text-brand-red transition-colors">Partnership</a></li>
+              <li><a href="#" className="hover:text-brand-red transition-colors">Events</a></li>
+              <li><a href="#" className="hover:text-brand-red transition-colors">News & Media</a></li>
+            </ul>
+          </div>
+
+          {/* For Sellers */}
+          <div>
+            <h3 className="text-white font-bold text-lg mb-6">For Sellers</h3>
+            <ul className="space-y-3 text-sm">
+              <li><a href="#" className="hover:text-brand-red transition-colors">Start Selling</a></li>
+              <li><a href="#" className="hover:text-brand-red transition-colors">Supplier Membership</a></li>
+              <li><a href="#" className="hover:text-brand-red transition-colors">Learning Center</a></li>
+              <li><a href="#" className="hover:text-brand-red transition-colors">Verified Supplier</a></li>
+              <li><a href="#" className="hover:text-brand-red transition-colors">Advertise with Us</a></li>
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h3 className="text-white font-bold text-lg mb-6">Contact Us</h3>
+            <ul className="space-y-4 text-sm">
+              <li className="flex items-start">
+                <MapPin size={18} className="mr-3 mt-0.5 text-brand-red" />
+                <span>123 Business Avenue, Suite 100<br />New York, NY 10001, USA</span>
+              </li>
+              <li className="flex items-center">
+                <Phone size={18} className="mr-3 text-brand-red" />
+                <span>+1 (800) 123-4567</span>
+              </li>
+              <li className="flex items-center">
+                <Mail size={18} className="mr-3 text-brand-red" />
+                <span>support@1mdm.com</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="border-t border-gray-800 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-sm text-gray-500">
+            &copy; {new Date().getFullYear()} 1MDM.com. All rights reserved.
+          </p>
+          <div className="flex space-x-6 mt-4 md:mt-0 text-sm text-gray-500">
+            <a href="#" className="hover:text-white">Privacy Policy</a>
+            <a href="#" className="hover:text-white">Terms of Service</a>
+            <a href="#" className="hover:text-white">Sitemap</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+
+// Header Component
+const Header: React.FC = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <>
+      {/* Top Bar */}
+      <div className="bg-gray-50 border-b border-gray-200 hidden md:block">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-9 flex justify-between items-center text-xs font-medium text-gray-500">
+          <div className="flex space-x-6">
+            <span className="text-gray-400">Welcome to 1MDM.com!</span>
+            <a href="#" className="hover:text-brand-red transition-colors">Sign In</a>
+            <a href="#" className="hover:text-brand-red transition-colors">Join Free</a>
+          </div>
+          <div className="flex space-x-6">
+            <a href="#" className="hover:text-brand-red transition-colors flex items-center gap-1">
+              My Account <ChevronDown size={10} />
+            </a>
+            <a href="#" className="hover:text-brand-red transition-colors">Help Center</a>
+            <a href="#" className="hover:text-brand-red transition-colors">Get App</a>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Header */}
+      <header 
+        className={`sticky top-0 left-0 w-full z-50 transition-all duration-300 ${
+          isScrolled ? 'bg-white shadow-lg py-2' : 'bg-white border-b border-gray-200 py-4'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center gap-8">
+            {/* Logo */}
+            <div className="flex items-center flex-shrink-0">
+              <a href="#" className="flex items-center gap-2 group">
+                <div className="bg-brand-red text-white font-heading font-bold text-3xl px-3 py-1 rounded-sm tracking-tighter group-hover:bg-brand-hover transition-colors shadow-sm">
+                  1MDM
+                </div>
+              </a>
+            </div>
+
+            {/* Search Bar (Desktop) */}
+            <div className="hidden lg:flex flex-grow max-w-3xl relative">
+              <div className="flex w-full border-2 border-brand-red rounded-md overflow-hidden shadow-sm focus-within:shadow-md transition-shadow">
+                <div className="bg-gray-50 px-4 py-2.5 text-gray-600 border-r border-gray-200 flex items-center text-sm font-medium cursor-pointer hover:bg-gray-100 transition-colors whitespace-nowrap">
+                  Products <ChevronDown size={14} className="ml-2 text-gray-400" />
+                </div>
+                <input 
+                  type="text" 
+                  placeholder="What are you looking for..." 
+                  className="flex-grow px-4 py-2.5 outline-none text-gray-700 placeholder-gray-400"
+                />
+                <button className="bg-brand-red text-white px-8 py-2.5 hover:bg-brand-hover transition-colors flex items-center font-bold text-sm tracking-wide uppercase">
+                  Search
+                </button>
+              </div>
+            </div>
+
+            {/* Actions */}
+            <div className="hidden md:flex items-center space-x-6 flex-shrink-0">
+              <div className="flex flex-col items-center text-gray-500 hover:text-brand-red cursor-pointer group transition-colors">
+                <User className="w-6 h-6 mb-0.5 group-hover:scale-110 transition-transform" />
+                <span className="text-[11px] font-medium">Sign In</span>
+              </div>
+              <div className="flex flex-col items-center text-gray-500 hover:text-brand-red cursor-pointer group transition-colors">
+                <Globe className="w-6 h-6 mb-0.5 group-hover:scale-110 transition-transform" />
+                <span className="text-[11px] font-medium">English</span>
+              </div>
+              <button className="bg-brand-red text-white px-6 py-2.5 rounded-md font-bold hover:bg-brand-hover transition-all text-sm shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                Start Selling
+              </button>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden flex items-center gap-4">
+              <Search className="w-6 h-6 text-gray-600" />
+              <button 
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="text-gray-600 hover:text-brand-red transition-colors"
+              >
+                {isMobileMenuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-white border-t border-gray-100 absolute w-full shadow-2xl z-50 h-screen overflow-y-auto">
+            <div className="px-4 pt-6 pb-8 space-y-2">
+              <a href="#" className="flex items-center justify-between px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-lg">
+                Buying Request Hub <ChevronDown size={16} />
+              </a>
+              <a href="#" className="flex items-center justify-between px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-lg">
+                Products <ChevronDown size={16} />
+              </a>
+              <a href="#" className="flex items-center justify-between px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-lg">
+                Suppliers <ChevronDown size={16} />
+              </a>
+              <div className="my-4 border-t border-gray-100"></div>
+              <a href="#" className="block px-4 py-3 text-base font-bold text-brand-red bg-red-50 rounded-lg">
+                Sell on 1MDM
+              </a>
+              <a href="#" className="block px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-lg">
+                Help Center
+              </a>
+              <div className="pt-6 mt-4">
+                 <button className="w-full bg-brand-red text-white px-4 py-4 rounded-lg font-bold hover:bg-brand-hover shadow-md mb-3">
+                   Join Free
+                 </button>
+                 <button className="w-full bg-white border-2 border-gray-200 text-gray-700 px-4 py-4 rounded-lg font-bold hover:bg-gray-50">
+                   Sign In
+                 </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </header>
+    </>
+  );
+};
+
+
+// SellerPage Component
+const SellerPage: React.FC = () => {
+  return (
+    <div className="bg-white font-sans">
+      {/* Hero Section */}
+      <section className="relative bg-brand-dark text-white min-h-[600px] flex items-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+            alt="Global Logistics" 
+            className="w-full h-full object-cover opacity-20"
+            onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src='https://placehold.co/2070x1000/222/FFF?text=Global+Trade' }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent"></div>
+        </div>
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="max-w-3xl animate-slide-up">
+            <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-white/20">
+              <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+              <span className="text-sm font-medium tracking-wide uppercase">#1 B2B Marketplace</span>
+            </div>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading font-bold leading-tight mb-6 tracking-tight">
+              Connect with buyers <br/>
+              <span className="text-brand-red">worldwide</span> for your product!
+            </h1>
+            <p className="text-xl text-gray-300 mb-10 font-light max-w-2xl leading-relaxed">
+              Join the fastest growing B2B platform. Reach millions of active buyers and expand your business globally with 1MDM's comprehensive selling tools.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-5">
+              <button className="bg-brand-red hover:bg-brand-hover text-white text-lg font-bold px-10 py-4 rounded-md transition-all shadow-lg hover:shadow-red-900/50 flex items-center justify-center transform hover:-translate-y-1">
+                Start Selling
+                <ArrowRight className="ml-2 w-6 h-6" />
+              </button>
+              <button className="group bg-transparent border-2 border-white hover:bg-white hover:text-brand-dark text-white text-lg font-bold px-10 py-4 rounded-md transition-all flex items-center justify-center">
+                <PlayCircle className="mr-2 w-6 h-6 group-hover:text-brand-red transition-colors" />
+                How it Works
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Statistics Section - MODIFIED FOR TOP-TO-BOTTOM LAYOUT */}
+      <section className="relative z-20 -mt-16 pb-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* New container for the stacked cards */}
+          <div className="flex flex-col space-y-6">
+
+            {/* Metric 1: Active Buyers (Updated Data and Card Style) */}
+            <div className="bg-white p-6 rounded-2xl shadow-xl border-l-4 border-brand-red hover:shadow-2xl transition duration-300">
+              <CountUpStats 
+                end={6000000} // MODIFIED: Changed from 26M to 6M
+                suffix="+" 
+                label="Active Buyers" 
+              />
+            </div>
+
+            {/* Metric 2: Product Enquiries (Card Style) */}
+            <div className="bg-white p-6 rounded-2xl shadow-xl border-l-4 border-brand-red hover:shadow-2xl transition duration-300">
+              <CountUpStats 
+                end={400000} 
+                suffix="+" 
+                label="Product Enquiries" 
+              />
+            </div>
+
+            {/* Metric 3: Countries & Regions (Card Style) */}
+            <div className="bg-white p-6 rounded-2xl shadow-xl border-l-4 border-brand-red hover:shadow-2xl transition duration-300">
+              <CountUpStats 
+                end={200} 
+                suffix="+" 
+                label="Countries & Regions" 
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Value Proposition */}
+      <section className="py-24 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-brand-dark mb-6">
+              Why Sell on 1MDM?
+            </h2>
+            <p className="text-gray-600 max-w-3xl mx-auto text-xl leading-relaxed">
+              We provide the digital infrastructure, verified buyer network, and marketing tools you need to take your business to the next level in the global market.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {[
+              {
+                icon: <Globe className="w-10 h-10 text-white" />,
+                title: "Global Reach",
+                description: "Access a massive network of verified buyers from over 200 countries looking for products like yours."
+              },
+              {
+                icon: <BarChart className="w-10 h-10 text-white" />,
+                title: "Smart Analytics",
+                description: "Use our advanced analytics and management tools to track performance and optimize your listings."
+              },
+              {
+                icon: <Shield className="w-10 h-10 text-white" />,
+                title: "Secure Trading",
+                description: "Benefit from our secure payment systems and verified buyer program to trade with confidence."
+              }
+            ].map((feature, index) => (
+              <div key={index} className="bg-white p-10 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 group hover:-translate-y-2">
+                <div className="mb-8 bg-brand-red w-20 h-20 rounded-2xl flex items-center justify-center shadow-lg shadow-red-200 group-hover:scale-110 transition-transform duration-300">
+                  {feature.icon}
+                </div>
+                <h3 className="text-2xl font-bold text-brand-dark mb-4 group-hover:text-brand-red transition-colors">{feature.title}</h3>
+                <p className="text-gray-600 leading-relaxed text-lg">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-24 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row items-center gap-20">
+            <div className="lg:w-1/2 relative">
+              <div className="absolute -top-10 -left-10 w-40 h-40 bg-gray-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-red-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+              <img 
+                src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1932&q=80" 
+                alt="Business Meeting" 
+                className="relative rounded-2xl shadow-2xl z-10"
+                onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src='https://placehold.co/1932x1200/222/FFF?text=Team+Collaboration' }}
+              />
+              <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-xl shadow-xl z-20 border border-gray-100 hidden md:block">
+                <div className="flex items-center gap-4">
+                  <div className="bg-green-100 p-3 rounded-full">
+                    <CheckCircle2 className="text-green-600 w-8 h-8" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500 font-medium">Verified Buyers</p>
+                    <p className="text-xl font-bold text-brand-dark">100% Guaranteed</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="lg:w-1/2">
+              <h2 className="text-4xl md:text-5xl font-heading font-bold text-brand-dark mb-10">
+                Start Selling in <span className="text-brand-red">3 Simple Steps</span>
+              </h2>
+              <div className="space-y-10">
+                {[
+                  {
+                    step: "1",
+                    title: "Create Your Account",
+                    desc: "Sign up for free and set up your company profile to build trust with buyers."
+                  },
+                  {
+                    step: "2",
+                    title: "Post Your Products",
+                    desc: "Upload your product catalog with high-quality images and detailed descriptions."
+                  },
+                  {
+                    step: "3",
+                    title: "Start Receiving Inquiries",
+                    desc: "Respond to buyer inquiries, negotiate deals, and grow your business globally."
+                  }
+                ].map((item, idx) => (
+                  <div key={idx} className="flex gap-8 group">
+                    <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-gray-50 text-brand-red border-2 border-gray-200 flex items-center justify-center font-bold text-2xl group-hover:bg-brand-red group-hover:text-white group-hover:border-brand-red transition-all duration-300 shadow-sm">
+                      {item.step}
+                    </div>
+                    <div className="pt-2">
+                      <h3 className="text-2xl font-bold text-brand-dark mb-3">{item.title}</h3>
+                      <p className="text-gray-600 text-lg leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-12">
+                <button className="bg-brand-dark text-white px-10 py-4 rounded-md font-bold hover:bg-black transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                  Register Now - It's Free
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Suppliers by Region (Footer style grid) */}
+      <section className="py-20 bg-gray-50 border-t border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h3 className="text-2xl font-bold text-brand-dark mb-10 flex items-center">
+            <Globe className="mr-3 text-brand-red" />
+            Find Suppliers by Region
+          </h3>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-y-4 gap-x-8">
+            {[
+              'China', 'United States', 'India', 'Germany', 'United Kingdom', 
+              'Turkey', 'Vietnam', 'Japan', 'South Korea', 'Italy', 
+              'France', 'Thailand', 'Malaysia', 'Brazil', 'Russia',
+              'Australia', 'Canada', 'Indonesia', 'Mexico', 'Spain',
+              'Taiwan', 'Netherlands', 'Poland', 'UAE', 'Pakistan'
+            ].map((country) => (
+              <a key={country} href="#" className="text-gray-600 hover:text-brand-red flex items-center gap-2 text-sm group transition-colors">
+                <span className="w-1.5 h-1.5 bg-gray-300 rounded-full group-hover:bg-brand-red transition-colors"></span>
+                {country} Suppliers
+              </a>
+            ))}
+            <a href="#" className="text-brand-red font-bold flex items-center gap-1 text-sm hover:underline mt-2">
+              View All Countries <ArrowRight className="w-3 h-3" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Bottom CTA */}
+      <section className="py-24 bg-brand-red relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <h2 className="text-4xl md:text-5xl font-heading font-black text-white mb-6">
+            Ready to Grow Your Business?
+          </h2>
+          <p className="text-red-100 text-xl mb-10 max-w-3xl mx-auto font-light">
+            Join thousands of suppliers who are already finding new customers and closing deals on 1MDM.
+          </p>
+          <button className="bg-white text-brand-red text-xl font-bold px-12 py-5 rounded-md shadow-2xl hover:bg-gray-100 transition-all transform hover:scale-105">
+            Get Started for Free
+          </button>
+          <p className="mt-6 text-sm text-red-200 opacity-80">No credit card required. Setup in 5 minutes.</p>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+
+// Main App Component
+const App: React.FC = () => {
+  return (
+    <>
+      <CustomStyles />
+      <div className="flex flex-col min-h-screen bg-white text-brand-dark">
+        <Header />
+        <main className="flex-grow">
+          <SellerPage />
+        </main>
+        <Footer />
+      </div>
+    </>
+  );
+};
+
+export default App;
