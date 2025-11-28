@@ -13,3 +13,6 @@ root.render(
     <App />
   </React.StrictMode>
 );
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
