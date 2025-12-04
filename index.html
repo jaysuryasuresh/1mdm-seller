@@ -110,62 +110,65 @@
     </nav>
 
     <!-- Hero Section (Updated to use a two-column layout on desktop) -->
-    <header class="hero-bg text-white py-20 md:py-32 relative">
-        <div class="container mx-auto px-4">
-            <!-- Two-column grid for large screens, stacked content for mobile -->
-            <div class="flex flex-col md:flex-row md:justify-between items-center md:items-start gap-12">
-                
-                <!-- Left Column: Title and CTAs -->
-                <div class="text-center md:text-left md:w-3/5">
-                    <h1 class="text-4xl md:text-6xl font-bold mb-4">Sell on 1mdm.com</h1>
-                    <p class="text-xl md:text-2xl mb-8 font-light opacity-90">Reach millions of B2B buyers globally</p>
-                    <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-4 mb-16 md:mb-0">
-                        <button class="bg-brand-red hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg shadow-xl transition transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-brand-red focus:ring-opacity-50">
-                            Start selling
-                        </button>
-                        <button class="bg-white hover:bg-gray-100 text-brand-dark font-bold py-3 px-8 rounded-lg shadow-xl transition transform hover:-translate-y-1 flex items-center justify-center gap-2 focus:outline-none focus:ring-4 focus:ring-white focus:ring-opacity-50">
-                            <i class="far fa-comments text-brand-red"></i> Chat with consultant
-                        </button>
-                    </div>
+   <header class="hero-bg text-white py-20 md:py-32 relative">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row md:justify-between items-center md:items-start gap-12">
+            
+            <!-- Left Column -->
+            <div class="text-center md:text-left md:w-3/5">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">Sell on 1mdm.com</h1>
+                <p class="text-xl md:text-2xl mb-8 font-light opacity-90">Reach millions of B2B buyers globally</p>
+                <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-4 mb-16 md:mb-0">
+                    <button class="bg-brand-red hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg shadow-xl transition transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-brand-red focus:ring-opacity-50">
+                        Start selling
+                    </button>
+                    <button class="bg-white hover:bg-gray-100 text-brand-dark font-bold py-3 px-8 rounded-lg shadow-xl transition transform hover:-translate-y-1 flex items-center justify-center gap-2 focus:outline-none focus:ring-4 focus:ring-white focus:ring-opacity-50">
+                        <i class="far fa-comments text-brand-red"></i> Chat with consultant
+                    </button>
                 </div>
+            </div>
 
-                <!-- Right Column: Vertical Stats Box -->
-                <div class="md:w-2/5 w-full max-w-sm md:max-w-none">
-                    <div class="bg-white rounded-xl shadow-2xl p-6 md:p-8 text-brand-dark border-b-4 border-brand-red relative z-10 overflow-hidden">
-                        
-                        <!-- Background Map for Visuals -->
-                        <div class="absolute inset-0 map-bg z-0"></div>
+            <!-- Right Column -->
+            <div class="md:w-2/5 w-full max-w-sm md:max-w-none">
+                <div class="bg-white rounded-xl shadow-2xl p-6 md:p-8 text-brand-dark border-b-4 border-brand-red relative z-10 overflow-hidden">
+                    
+                    <!-- Background Map -->
+                    <div class="absolute inset-0 map-bg z-0"></div>
 
-                        <!-- Stat items: Stacked vertically -->
-                        <div class="space-y-6 relative z-10 text-center"> 
-                            
-                            <!-- Stat 1 -->
-                            <div class="p-2 border-b border-gray-100 pb-4">
-                                <div class="text-brand-red text-3xl mb-1"><i class="fas fa-users"></i></div>
-                                <div class="text-3xl font-bold text-brand-red counter" data-target="23660000">0</div>
-                                <div class="text-sm text-gray-600 font-medium">Active buyers globally</div>
-                            </div>
+                    <!-- Centered Image Added -->
+                    <img src="images/world.jpeg" class="w-32 mx-auto mb-6 opacity-90 relative z-10" alt="World Map" />
 
-                            <!-- Stat 2 -->
-                            <div class="p-2 border-b border-gray-100 pb-4">
-                                <div class="text-brand-red text-3xl mb-1"><i class="fas fa-search-plus"></i></div>
-                                <div class="text-3xl font-bold text-brand-red counter" data-target="364000">0</div>
-                                <div class="text-sm text-gray-600 font-medium">Product inquiries daily</div>
-                            </div>
-                            
-                            <!-- Stat 3 (Last item, no bottom border) -->
-                            <div class="p-2">
-                                <div class="text-brand-red text-3xl mb-1"><i class="fas fa-globe-americas"></i></div>
-                                <div class="text-3xl font-bold text-brand-red counter" data-target="182">0</div>
-                                <div class="text-sm text-gray-600 font-medium">Countries and regions</div>
-                            </div>
+                    <!-- Stats -->
+                    <div class="space-y-6 relative z-10 text-center">
 
+                        <!-- Stat 1 -->
+                        <div class="p-2 border-b border-gray-100 pb-4">
+                            <div class="text-brand-red text-3xl mb-1"><i class="fas fa-users"></i></div>
+                            <div class="text-3xl font-bold text-brand-red counter" data-target="23660000">0</div>
+                            <div class="text-sm text-gray-600 font-medium">Active buyers globally</div>
                         </div>
+
+                        <!-- Stat 2 -->
+                        <div class="p-2 border-b border-gray-100 pb-4">
+                            <div class="text-brand-red text-3xl mb-1"><i class="fas fa-search-plus"></i></div>
+                            <div class="text-3xl font-bold text-brand-red counter" data-target="364000">0</div>
+                            <div class="text-sm text-gray-600 font-medium">Product inquiries daily</div>
+                        </div>
+
+                        <!-- Stat 3 -->
+                        <div class="p-2">
+                            <div class="text-brand-red text-3xl mb-1"><i class="fas fa-globe-americas"></i></div>
+                            <div class="text-3xl font-bold text-brand-red counter" data-target="182">0</div>
+                            <div class="text-sm text-gray-600 font-medium">Countries and regions</div>
+                        </div>
+
                     </div>
                 </div>
             </div>
+
         </div>
-    </header>
+    </div>
+</header>
 
     <!-- Global Reach Section (Adjusted top padding since the stats are now inside the header) -->
     <section class="pt-20 pb-20 bg-white">
