@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell on 1MDM | World's Largest Medical Equipment Marketplace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-red': '#e31e24',
+                        'brand-dark': '#222222',
+                        'brand-gray': '#f5f5f5',
+                    },
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom background for the hero section */
+        .hero-bg {
+            background-color: #f8f9fa;
+            /* Using a medical-themed placeholder image */
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        /* Subtle world map background for the stats section */
+        .map-bg {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/World_map_blank_without_borders.svg/2000px-World_map_blank_without_borders.svg.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="font-sans text-brand-dark antialiased">
+
+    <!-- Top Bar - Hidden on mobile -->
+    <div class="bg-white border-b text-xs py-2 hidden md:block">
+        <div class="container mx-auto px-4 flex justify-between items-center text-gray-600">
+            <span>World's Largest Medical Equipment Market Place</span>
+            <div class="space-x-4">
+                <a href="#" class="hover:text-brand-red">My account</a>
+                <span>|</span>
+                <a href="#" class="hover:text-brand-red">Contact Us</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="text-3xl font-black text-brand-red tracking-tighter">
+                        1MDM
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-gray-700 hover:text-brand-red font-medium">About Us</a>
+                    <a href="#" class="text-gray-700 hover:text-brand-red font-medium">Our Story</a>
+                    <a href="#" class="text-brand-red font-bold">Sell on 1MDM</a>
+                    <a href="#" class="text-gray-700 hover:text-brand-red font-medium">Pricing</a>
+                    <a href="#" class="bg-brand-red text-white px-6 py-2.5 rounded hover:bg-red-700 transition font-medium shadow-md">
+                        Start Selling
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="text-gray-700 hover:text-brand-red focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 pt-2 pb-4 space-y-1">
+                <a href="#" class="block px-3 py-2 text-gray-700 hover:bg-gray-50 hover:text-brand-red font-medium rounded-lg">About Us</a>
+                <a href="#" class="block px-3 py-2 text-gray-700 hover:bg-gray-50 hover:text-brand-red font-medium rounded-lg">Our Story</a>
+                <a href="#" class="block px-3 py-2 text-brand-red font-bold bg-red-50 rounded-lg">Sell on 1MDM</a>
+                <a href="#" class="block px-3 py-2 text-gray-700 hover:bg-gray-50 hover:text-brand-red font-medium rounded-lg">Pricing</a>
+                <a href="#" class="block px-3 py-2 mt-4 text-center bg-brand-red text-white rounded-lg font-medium shadow-lg">Start Selling</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Updated to use a two-column layout on desktop) -->
+    <header class="hero-bg text-white py-20 md:py-32 relative">
+        <div class="container mx-auto px-4">
+            <!-- Two-column grid for large screens, stacked content for mobile -->
+            <div class="flex flex-col md:flex-row md:justify-between items-center md:items-start gap-12">
+                
+                <!-- Left Column: Title and CTAs -->
+                <div class="text-center md:text-left md:w-3/5">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4">Sell on 1mdm.com</h1>
+                    <p class="text-xl md:text-2xl mb-8 font-light opacity-90">Reach millions of B2B buyers globally</p>
+                    <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-4 mb-16 md:mb-0">
+                        <button class="bg-brand-red hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg shadow-xl transition transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-brand-red focus:ring-opacity-50">
+                            Start selling
+                        </button>
+                        <button class="bg-white hover:bg-gray-100 text-brand-dark font-bold py-3 px-8 rounded-lg shadow-xl transition transform hover:-translate-y-1 flex items-center justify-center gap-2 focus:outline-none focus:ring-4 focus:ring-white focus:ring-opacity-50">
+                            <i class="far fa-comments text-brand-red"></i> Chat with consultant
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Column: Vertical Stats Box -->
+                <div class="md:w-2/5 w-full max-w-sm md:max-w-none">
+                    <div class="bg-white rounded-xl shadow-2xl p-6 md:p-8 text-brand-dark border-b-4 border-brand-red relative z-10 overflow-hidden">
+                        
+                        <!-- Background Map for Visuals -->
+                        <div class="absolute inset-0 map-bg z-0"></div>
+
+                        <!-- Stat items: Stacked vertically -->
+                        <div class="space-y-6 relative z-10 text-center"> 
+                            
+                            <!-- Stat 1 -->
+                            <div class="p-2 border-b border-gray-100 pb-4">
+                                <div class="text-brand-red text-3xl mb-1"><i class="fas fa-users"></i></div>
+                                <div class="text-3xl font-bold text-brand-red counter" data-target="23660000">0</div>
+                                <div class="text-sm text-gray-600 font-medium">Active buyers globally</div>
+                            </div>
+
+                            <!-- Stat 2 -->
+                            <div class="p-2 border-b border-gray-100 pb-4">
+                                <div class="text-brand-red text-3xl mb-1"><i class="fas fa-search-plus"></i></div>
+                                <div class="text-3xl font-bold text-brand-red counter" data-target="364000">0</div>
+                                <div class="text-sm text-gray-600 font-medium">Product inquiries daily</div>
+                            </div>
+                            
+                            <!-- Stat 3 (Last item, no bottom border) -->
+                            <div class="p-2">
+                                <div class="text-brand-red text-3xl mb-1"><i class="fas fa-globe-americas"></i></div>
+                                <div class="text-3xl font-bold text-brand-red counter" data-target="182">0</div>
+                                <div class="text-sm text-gray-600 font-medium">Countries and regions</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Global Reach Section (Adjusted top padding since the stats are now inside the header) -->
+    <section class="pt-20 pb-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-brand-dark">1mdm.com is a leading ecommerce platform that helps SMEs go global</h2>
+                <p class="text-lg text-gray-500">Tap into a massive network of healthcare and medical professionals seeking reliable equipment and supplies.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Video Placeholder -->
+                <div class="rounded-xl overflow-hidden shadow-2xl aspect-video bg-black relative group cursor-pointer transform hover:scale-[1.01] transition-transform">
+                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Video Cover: Modern Hospital Equipment" class="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition" onerror="this.onerror=null; this.src='https://placehold.co/1350x759/000000/ffffff?text=Video+Placeholder';" loading="lazy">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-20 h-20 bg-brand-red rounded-full flex items-center justify-center pl-2 shadow-lg group-hover:scale-110 transition duration-300 ease-in-out">
+                            <i class="fas fa-play text-white text-3xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Benefits List -->
+                <div class="space-y-8">
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-red-100 flex items-center justify-center shadow-md">
+                            <i class="fas fa-globe text-brand-red text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Connect with millions of buyers</h3>
+                            <p class="text-gray-600 leading-relaxed">Connect with millions of business buyers from around the world looking for medical equipment and supplies, expanding your market reach instantly.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-red-100 flex items-center justify-center shadow-md">
+                            <i class="fas fa-tools text-brand-red text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Powerful ecommerce tools</h3>
+                            <p class="text-gray-600 leading-relaxed">Get the tools and know-how to build a successful ecommerce presence for your business instantly, including inventory management and lead qualification.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-red-100 flex items-center justify-center shadow-md">
+                            <i class="fas fa-percentage text-brand-red text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Low take rates</h3>
+                            <p class="text-gray-600 leading-relaxed">Pocket more from each sale, with competitive take rates that maximize your profit margins, starting as low as 0% in some categories.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="py-20 bg-brand-gray">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Grow your business with a suite of tools built for you</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Feature 1: Custom Storefront -->
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 border-t-4 border-brand-red">
+                    <div class="text-brand-red text-4xl mb-4"><i class="fas fa-store"></i></div>
+                    <h3 class="text-xl font-bold mb-3">Custom storefront</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Set up a professional store that showcases your brand identity. Differentiate yourself with a full dedicated store—no coding skills necessary!</p>
+                </div>
+
+                <!-- Feature 2: Advertising Tools -->
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 border-t-4 border-brand-red">
+                    <div class="text-brand-red text-4xl mb-4"><i class="fas fa-bullhorn"></i></div>
+                    <h3 class="text-xl font-bold mb-3">Advertising tools</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Increase exposure by up to 120% with smart advertising tools. Get your products placed in the right spots to be noticed by the exact audience you are targeting.</p>
+                </div>
+
+                <!-- Feature 3: Data and Analytics -->
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 border-t-4 border-brand-red">
+                    <div class="text-brand-red text-4xl mb-4"><i class="fas fa-chart-line"></i></div>
+                    <h3 class="text-xl font-bold mb-3">Data and analytics</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Optimize your every move with in-depth sales data and customer insights. Improve performance with dashboards detailing exposure, click volume, spend, and more.</p>
+                </div>
+
+                <!-- Feature 4: Customer Support -->
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 border-t-4 border-brand-red">
+                    <div class="text-brand-red text-4xl mb-4"><i class="fas fa-headset"></i></div>
+                    <h3 class="text-xl font-bold mb-3">Customer support</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Know you're supported throughout your journey. From onboarding help to online chats and account optimization tips — our dedicated team is here for you 24/7.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials (Converted to Auto-Swiping Carousel) -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Success stories from 1mdm.com sellers</h2>
+            
+            <!-- Testimonial Carousel Wrapper -->
+            <div id="testimonial-carousel" class="relative overflow-hidden max-w-2xl mx-auto">
+                <div id="testimonial-track" class="flex transition-transform duration-500 ease-in-out">
+                    
+                    <!-- Story 1: Lab Evolution (Using uploaded image) -->
+                    <div class="flex-shrink-0 w-full p-2">
+                        <div class="border rounded-xl p-8 shadow-md transition duration-300 group hover:border-brand-red hover:shadow-xl">
+                            <div class="flex items-start gap-4 mb-4">
+                                <img src="/image_6760e8.jpg" alt="Lab Evolution Profile" class="flex-shrink-0 w-16 h-16 rounded-full object-cover shadow-md border-2 border-brand-red" onerror="this.onerror=null; this.src='https://placehold.co/64x64/2563eb/ffffff?text=L';" loading="lazy">
+                                <div>
+                                    <h4 class="font-bold text-lg">Lab Evolution</h4>
+                                    <p class="text-sm text-gray-500">Import - Export Company, Established 2010</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 italic border-l-4 border-red-200 pl-4">"Our company's team of experts carefully follows customers all over the world. 1MDM is able to offer the necessary visibility to promote all the most competitive brands we represent to new markets."</p>
+                        </div>
+                    </div>
+
+                    <!-- Story 2: Mr David (Using uploaded image) -->
+                    <div class="flex-shrink-0 w-full p-2">
+                        <div class="border rounded-xl p-8 shadow-md transition duration-300 group hover:border-brand-red hover:shadow-xl">
+                            <div class="flex items-start gap-4 mb-4">
+                                <img src="/image_67617d.jpg" alt="Mr David Profile" class="flex-shrink-0 w-16 h-16 rounded-full object-cover shadow-md border-2 border-brand-red" onerror="this.onerror=null; this.src='https://placehold.co/64x64/dc2626/ffffff?text=D';" loading="lazy">
+                                <div>
+                                    <h4 class="font-bold text-lg">Mr David</h4>
+                                    <p class="text-sm text-gray-500">Manufacturing Company, Since 2021</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 italic border-l-4 border-red-200 pl-4">"With full respect for the environment and several years of experience, we needed a platform to connect directly with global hospitals. 1MDM made the process seamless and has been a cornerstone of our export strategy."</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Story 3: Rupesh Kanna (Using uploaded image) -->
+                    <div class="flex-shrink-0 w-full p-2">
+                        <div class="border rounded-xl p-8 shadow-md transition duration-300 group hover:border-brand-red hover:shadow-xl">
+                            <div class="flex items-start gap-4 mb-4">
+                                <img src="/image_67b31b.jpg" alt="Rupesh Kanna Profile" class="flex-shrink-0 w-16 h-16 rounded-full object-cover shadow-md border-2 border-brand-red" onerror="this.onerror=null; this.src='https://placehold.co/64x64/10b981/ffffff?text=R';" loading="lazy">
+                                <div>
+                                    <h4 class="font-bold text-lg">Rupesh Kanna</h4>
+                                    <p class="text-sm text-gray-500">Medical Device Entrepreneur, New Seller</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 italic border-l-4 border-red-200 pl-4">"As a new product line founder, I needed a trusted platform to gain credibility. 1MDM provided the immediate global reach I needed to move beyond blogging and start selling my innovative products."</p>
+                        </div>
+                    </div>
+
+                    <!-- Story 4: LTA International (Using uploaded image) -->
+                    <div class="flex-shrink-0 w-full p-2">
+                        <div class="border rounded-xl p-8 shadow-md transition duration-300 group hover:border-brand-red hover:shadow-xl">
+                            <div class="flex items-start gap-4 mb-4">
+                                <img src="/image_676145.jpg" alt="LTA International Profile" class="flex-shrink-0 w-16 h-16 rounded-full object-cover shadow-md border-2 border-brand-red" onerror="this.onerror=null; this.src='https://placehold.co/64x64/9333ea/ffffff?text=L';" loading="lazy">
+                                <div>
+                                    <h4 class="font-bold text-lg">LTA International</h4>
+                                    <p class="text-sm text-gray-500">Export Management, Since 1994</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 italic border-l-4 border-red-200 pl-4">"LTA International's expertise in logistics is unmatched, but reaching new global partners required a dedicated B2B channel. 1MDM allowed us to offload the customer acquisition and focus purely on fulfillment."</p>
+                        </div>
+                    </div>
+                    
+                </div>
+                <!-- Navigation Dots -->
+                <div id="carousel-dots" class="flex justify-center mt-6 space-x-2">
+                    <!-- Dots will be added by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section class="py-20 bg-brand-red text-white text-center">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8">Ready to Grow Your Business?</h2>
+            <p class="text-lg mb-8 opacity-90">Join the world's largest marketplace for medical devices and equipment today.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button class="bg-white text-brand-red font-bold py-3 px-10 rounded-lg shadow-xl transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-white focus:ring-opacity-50">
+                    Start selling
+                </button>
+                <button class="bg-transparent border-2 border-white text-white font-bold py-3 px-10 rounded-lg shadow-xl transition hover:bg-white hover:text-brand-red flex items-center justify-center gap-2 focus:outline-none focus:ring-4 focus:ring-white focus:ring-opacity-50">
+                    <i class="far fa-comments"></i> Chat with consultant
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white pt-16 pb-8 border-t">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+                <!-- Col 1: Logo & Social -->
+                <div class="col-span-2 md:col-span-1">
+                    <div class="text-3xl font-black text-brand-red tracking-tighter mb-4">1MDM</div>
+                    <p class="text-gray-500 text-sm mb-4">One Medical Devices Market Place</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-brand-red transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-brand-red transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-brand-red transition"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-brand-red transition"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Col 2: Platform -->
+                <div>
+                    <h4 class="font-bold mb-4 text-brand-dark">Platform</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><a href="#" class="hover:text-brand-red transition">Sell on 1MDM</a></li>
+                        <li><a href="#" class="hover:text-brand-red transition">Pricing</a></li>
+                        <li><a href="#" class="hover:text-brand-red transition">Blog</a></li>
+                        <li><a href="#" class="hover:text-brand-red transition">Brands</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: About Us -->
+                <div>
+                    <h4 class="font-bold mb-4 text-brand-dark">About Us</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><a href="#" class="hover:text-brand-red transition">Our Story</a></li>
+                        <li><a href="#" class="hover:text-brand-red transition">Careers</a></li>
+                        <li><a href="#" class="hover:text-brand-red transition">Press Room</a></li>
+                        <li><a href="#" class="hover:text-brand-red transition">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Policies -->
+                <div>
+                    <h4 class="font-bold mb-4 text-brand-dark">Policies</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><a href="#" class="hover:text-brand-red transition">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-brand-red transition">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-brand-red transition">Delivery Information</a></li>
+                        <li><a href="#" class="hover:text-brand-red transition">Return Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t pt-8 text-center text-gray-500 text-sm">
+                <p>&copy; 2025 1MDM ⚡ by SuperLabs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Stats Counter Script -->
+    <script>
+        // Check if IntersectionObserver is supported before proceeding
+        if ('IntersectionObserver' in window) {
+            const counters = document.querySelectorAll('.counter');
+            const speed = 200; // Determines the speed of the counter animation
+
+            /**
+             * Recursively updates the counter element's text until it reaches the target value.
+             */
+            const updateCount = (counter) => {
+                const target = +counter.getAttribute('data-target');
+                // Remove commas before parsing the current value
+                const count = +counter.innerText.replace(/,/g, '');
+                
+                // Calculate the increment value
+                const inc = target / speed;
+
+                if (count < target) {
+                    // Update the count and format with commas (locale string)
+                    counter.innerText = Math.ceil(count + inc).toLocaleString();
+                    // Schedule the next update
+                    setTimeout(() => updateCount(counter), 20);
+                } else {
+                    // Ensure the final number is the exact target value
+                    counter.innerText = target.toLocaleString();
+                }
+            };
+
+            /**
+             * Starts the counter animation for all elements with the 'counter' class.
+             */
+            const animateCounters = () => {
+                counters.forEach(counter => updateCount(counter));
+            };
+
+            // Use Intersection Observer to trigger the animation when the stats section comes into view
+            let observer = new IntersectionObserver((entries, observer) => { 
+                entries.forEach(entry => {
+                    // When the target element is intersecting (visible)
+                    if(entry.isIntersecting){
+                        animateCounters();
+                        // Stop observing once the animation has started
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                // Trigger when 50% of the element is visible
+                threshold: 0.5
+            });
+
+            // Find the parent container of the counters to observe (now the vertical stats box itself)
+            const statsBox = document.querySelector('.bg-white.rounded-xl.shadow-2xl.p-6');
+            if (statsBox) {
+                observer.observe(statsBox);
+            }
+        }
+    </script>
+    
+    <!-- Testimonial Carousel Script -->
+    <script>
+        const track = document.getElementById('testimonial-track');
+        const carousel = document.getElementById('testimonial-carousel');
+        const dotsContainer = document.getElementById('carousel-dots');
+        // Select all direct children of the track
+        const slides = document.querySelectorAll('#testimonial-track > div'); 
+        const totalSlides = slides.length;
+        let currentSlide = 0;
+        const intervalTime = 5000; // Auto-swipe every 5 seconds
+
+        if (track && carousel && dotsContainer && totalSlides > 0) {
+            // 1. Create Navigation Dots
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('button');
+                // Tailwind classes for dot styling
+                dot.classList.add('w-3', 'h-3', 'rounded-full', 'bg-gray-300', 'hover:bg-brand-red', 'transition-colors', 'focus:outline-none');
+                dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+                dot.setAttribute('data-index', i);
+                dot.onclick = () => moveToSlide(i);
+                dotsContainer.appendChild(dot);
+            }
+            const dots = dotsContainer.querySelectorAll('button');
+
+            // 2. Function to move the carousel
+            function moveToSlide(index) {
+                // Ensure index wraps around (0, 1, 2, 3, 0, 1...)
+                currentSlide = index % totalSlides; 
+                if (currentSlide < 0) {
+                    currentSlide = totalSlides - 1;
+                }
+                
+                // Calculate the CSS translation percentage
+                const offset = -currentSlide * 100;
+                track.style.transform = `translateX(${offset}%)`;
+                updateDots();
+            }
+
+            // 3. Function to update dot active state
+            function updateDots() {
+                dots.forEach((dot, index) => {
+                    // Remove current active state and set new active state
+                    dot.classList.remove('bg-brand-red');
+                    if (index === currentSlide) {
+                        dot.classList.add('bg-brand-red');
+                    }
+                });
+            }
+
+            // 4. Auto-swiping logic
+            let autoSwipe = setInterval(() => {
+                moveToSlide(currentSlide + 1);
+            }, intervalTime);
+
+            // Initial state setup
+            moveToSlide(0);
+
+            // Pause on hover for better user experience
+            carousel.addEventListener('mouseenter', () => clearInterval(autoSwipe));
+            carousel.addEventListener('mouseleave', () => {
+                autoSwipe = setInterval(() => {
+                    moveToSlide(currentSlide + 1);
+                }, intervalTime);
+            });
+        }
+    </script>
+</body>
+</html>
